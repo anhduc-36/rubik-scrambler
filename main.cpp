@@ -3,16 +3,17 @@
 #include <iostream>
 #include <random>
 #include <string>
+#include <cctype>
 
 using namespace std;
 
 const char moves[6] = { 'R', 'L', 'F', 'B', 'U', 'D' };
 const char* modifier[3] = { "", "'", "2" };
 
+mt19937 mt(random_device{}());
+
 string generateScramble(int length)
 {
-	random_device rd;
-	mt19937 mt(rd());
 	uniform_int_distribution<int> movesdist(0, 5);
 	uniform_int_distribution<int> modifdist(0, 2);
 	string scramble;
@@ -47,6 +48,7 @@ start:
 		cout << "Invalid scramble length! Please try again.\n";
 		goto start;
 	}
+	
 	cout << "Enter number of scramble: ";
 	cin >> scrambleCount;
 	if (scrambleCount <= 0)
@@ -54,14 +56,29 @@ start:
 		cout << "Invalid scramble count! Please try again.\n";
 		goto start;
 	}
+	
+	cout << "Save to file? (Y/N): ";
+	cin >> saveFile;
+	
+	bool saving = (tolower(saveFile) == 'y');
+	if (saving)
+    {
+        string filename = "scramble.txt";
+        cout << "Enter filename (e.g. scramble.txt): ";
+        cin >> filename;
 
+        if (!freopen(filename.c_str(), "w", stdout))
+        {
+            cerr << "Error opening file. Scrambles will only print to console.\n";
+            saving = false;
+        }
+    }
+	
 	cout << "Your Scramble: \n";
 
 	int lastMove = -1;
 	for (int i = 0; i < scrambleCount; i++)
-	{
 		cout << i + 1 << ". " << generateScramble(scrambleSize) << "\n";
-	}
 
 	return 0;
 }
