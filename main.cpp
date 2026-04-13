@@ -66,6 +66,9 @@ int main()
 	bool saving = (tolower(saveFile) == 'y');
 	if (saving)
     {
+		ios_base::sync_with_stdio(false);
+		cout.tie(NULL);
+		
         string filename = "scramble.txt";
         cout << "Enter filename (e.g. scramble.txt): ";
         cin >> filename;
