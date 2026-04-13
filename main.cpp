@@ -4,6 +4,7 @@
 #include <random>
 #include <string>
 #include <cctype>
+#include <cstdio>
 
 using namespace std;
 
@@ -18,6 +19,7 @@ string generateScramble(int length)
 	uniform_int_distribution<int> modifdist(0, 2);
 	string scramble;
 	int lastMove = -1;
+	
 	for (int i = 0; i < length; i++)
 	{
 		int currentMove;
@@ -40,22 +42,23 @@ int main()
 	int scrambleSize = 20;
 	int scrambleCount = 1;
 
-start:
-	cout << "Enter your scramble length: ";
-	cin >> scrambleSize;
-	if (scrambleSize <= 0)
+	do 
 	{
-		cout << "Invalid scramble length! Please try again.\n";
-		goto start;
-	}
-	
-	cout << "Enter number of scramble: ";
-	cin >> scrambleCount;
-	if (scrambleCount <= 0)
+        cout << "Enter your scramble length: ";
+        cin >> scrambleSize;
+        if (scrambleSize <= 0) 
+			cout << "Invalid length! Please try again.\n";
+    } 
+	while (scrambleSize <= 0);
+
+    do 
 	{
-		cout << "Invalid scramble count! Please try again.\n";
-		goto start;
-	}
+        cout << "Enter number of scrambles: ";
+        cin >> scrambleCount;
+        if (scrambleCount <= 0) 
+			cout << "Invalid count! Please try again.\n";
+    } 
+	while (scrambleCount <= 0);
 	
 	cout << "Save to file? (Y/N): ";
 	cin >> saveFile;
