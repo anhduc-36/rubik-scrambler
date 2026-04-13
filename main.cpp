@@ -44,14 +44,14 @@ start:
 	cin >> scrambleSize;
 	if (scrambleSize <= 0)
 	{
-		cout << "Invalid scramble! Please try again.\n";
+		cout << "Invalid scramble length! Please try again.\n";
 		goto start;
 	}
 	cout << "Enter number of scramble: ";
 	cin >> scrambleCount;
 	if (scrambleCount <= 0)
 	{
-		cout << "Invalid scramble! Please try again.\n";
+		cout << "Invalid scramble count! Please try again.\n";
 		goto start;
 	}
 
